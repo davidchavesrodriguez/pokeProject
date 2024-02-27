@@ -11,9 +11,10 @@ class PokeController extends AbstractController
     #[Route("/", name: "mainpage")]
     public function mainpage(): Response
     {
+        dd($_SERVER);
         $pokemonData = []; // Array para almacenar los datos de los Pokémon
 
-        for ($i = 1; $i <= 2; $i++) {
+        for ($i = 880; $i <= 890; $i++) {
             $url = 'https://pokeapi.co/api/v2/pokemon/' . $i;
             $response = file_get_contents($url);
             $data = json_decode($response, true);
