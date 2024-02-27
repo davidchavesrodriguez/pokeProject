@@ -1,11 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{title}}</title>
-</head>
-<body>
-    
-</body>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>{{ title }}</title>
+	</head>
+	<body>
+		<h1>Pokémon Data</h1>
+		{% for pokemon in pokemonData %}
+			<div>
+				<h2>Pokémon ID:
+					{{ pokemon.id }}</h2>
+				<p>Name:
+					{{ pokemon.name }}</p>
+				<p>Types:</p>
+				<ul>
+					{% for type in pokemon.types %}
+						<li>{{ type }}</li>
+					{% endfor %}
+				</ul>
+
+				<p>Abilities:</p>
+				<ul>
+					{% for ability in pokemon.abilities %}
+						<li>{{ ability }}</li>
+					{% endfor %}
+				</ul>
+
+				<p>Moves:</p>
+				<select>
+					{% for move in pokemon.moves %}
+						<option>{{ move }}</option>
+					{% endfor %}
+				</select>
+				<br><br>
+				<img src="{{ pokemon.sprite }}" alt="Pokemon Sprite">
+				<hr>
+			</div>
+		{% endfor %}
+	</body>
 </html>

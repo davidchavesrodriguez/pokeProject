@@ -11,33 +11,60 @@ class PokeController extends AbstractController
     #[Route("/", name: "mainpage")]
     public function mainpage(): Response
     {
-        for ($i = 490; $i <= 498; $i++) {
+        $pokemonData = []; // Array para almacenar los datos de los Pokémon
+
+        for ($i = 1; $i <= 2; $i++) {
             $url = 'https://pokeapi.co/api/v2/pokemon/' . $i;
             $response = file_get_contents($url);
-            $data = json_decode($response, true); 
+            $data = json_decode($response, true);
 
-            echo "Pokemon ID: " . $i . "<br>";
-            echo "Name: " . $data['name'] . "<br>";
-            // $types= $data["types"];
-            // foreach ($types as $type) {
-            //     $type= $types["type"];
-            //     echo "Type: ". $type;
-            // }
-            if (isset($data['abilities'])) {
-                $abilities = $data['abilities'];
-                foreach ($abilities as $abilityData) {
-                    $ability = $abilityData['ability'];
-                    echo "Ability Name: " . $ability['name'] . "<br>";
+            $pokemon = []; // Array para almacenar los datos de un Pokémon específico
+
+            $pokemon['id'] = $i;
+            $pokemon['name'] = $data['name'];
+
+            $types = [];
+            if (isset($data["types"])) {
+                foreach ($data["types"] as $typeData) {
+                    $types[] = $typeData["type"]["name"];
                 }
-                echo "<img src='" . $data['sprites']['front_default'] . "'><br>";                echo "<hr>";
             } else {
-                echo "Abilities not found for Pokemon ID: " . $i . "<br>";
-                echo "<hr>";
+                $types[] = "Types not found";
             }
+
+            $abilities = [];
+            if (isset($data['abilities'])) {
+                foreach ($data['abilities'] as $abilityData) {
+                    $abilities[] = $abilityData['ability']['name']; // Añadir la habilidad al array de habilidades
+                }
+            } else {
+                $abilities[] = "Abilities not found";
+            }
+
+            $moves = [];
+            if (isset($data["moves"])) {
+                foreach ($data["moves"] as $moveData) {
+                    $moves[] = $moveData["move"]["name"];
+                }
+            } else {
+                $moves[] = "Moves not found";
+            }
+
+            $pokemon["types"] = $types;
+
+            $pokemon['abilities'] = $abilities;
+
+            $pokemon["moves"]= $moves;
+
+            $pokemon['sprite'] = $data['sprites']['front_default'];
+
+            $pokemonData[] = $pokemon; // Agregar los datos del Pokémon al array principal
         }
 
+        // Renderizar la plantilla y pasar los datos de los Pokémon
         return $this->render("base.html.twig", [
-            "title" => "PokeProject"
+            "title" => "PokeProject",
+            "pokemonData" => $pokemonData,
         ]);
     }
 }
