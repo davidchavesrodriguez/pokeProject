@@ -1,0 +1,104 @@
+/* GENERAL */
+body{
+    background-color: lightgoldenrodyellow;
+}
+
+/* Pokemon Cards */
+.pokemonDiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 10px;
+    border: 1px solid black;
+    border-radius: 20px;
+}
+
+img{
+    background-color: white;
+    border-radius: 50%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    aspect-ratio: auto;
+}
+/* Pokemon types */
+.grass {
+    background-color: green;
+    color: white;
+}
+
+.fire {
+    background-color: red;
+    color: white;
+}
+
+.water {
+    background-color: blue;
+    color: white;
+}
+
+.electric {
+    background-color: yellow;
+}
+
+.ice {
+    background-color: lightblue;
+}
+
+.fighting {
+    background-color: orange;
+}
+
+.poison {
+    background-color: purple;
+    color: white;
+}
+
+.ground {
+    background-color: brown;
+    color: white;
+}
+
+.flying {
+    background-color: skyblue;
+}
+
+.psychic {
+    background-color: violet;
+}
+
+.bug {
+    background-color: rgb(170, 250, 78);
+}
+
+.rock {
+    background-color: gray;
+}
+
+.ghost {
+    background-color: darkviolet;
+    color: white;
+}
+
+.dragon {
+    background-color: indigo;
+    color: white;
+}
+
+.dark {
+    background-color: darkslategray;
+    color: white;
+}
+
+.steel {
+    background-color: steelblue;
+    color: white;
+}
+
+.fairy {
+    background-color: lightpink;
+}
+
+.normal {
+    background-color: whitesmoke;
+}

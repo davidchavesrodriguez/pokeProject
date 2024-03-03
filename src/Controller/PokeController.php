@@ -26,37 +26,12 @@ class PokeController extends AbstractController
         // Call the findAll method to retrieve all Pokemon entities
         $allPokemon = $this->pokemonRepository->findAll();
     
-        // Initialize arrays to store names and sprites
-        $pokemonNames = [];
-        $pokemonSprites = [];
-    
-        // Iterate over each Pokemon entity to collect names and sprites
-        foreach ($allPokemon as $pokemon) {
-            $pokemonNames[] = $pokemon->getName();
-            $pokemonSprites[] = $pokemon->getSprite();
-        }
-    
-        // Initialize an array to store HTML elements for each Pokemon
-        $pokemonHtml = [];
-    
-        // Construct HTML elements for each Pokemon
-        foreach ($pokemonNames as $index => $name) {
-            $sprite = $pokemonSprites[$index];
-            $pokemonHtml[] = "<div><strong>$name</strong><br><img src='$sprite' onerror=\"this.src='assets/substitute.png'\" alt='$name'></div>";
-        }
-    
-        // Construct the final HTML response by joining HTML elements
-        $htmlResponse = implode('', $pokemonHtml);
-    
         // Return a response object with HTML content
-        
         return $this->render("base.html.twig", [
             "title" => "PokeProject",
-            "pokemonData" => $htmlResponse,
+            "pokemonData" => $allPokemon,
         ]);
     }
-    
-
 
     // Creates the whole database if needed
     #[Route("/createDatabase", name: "createDatabase")]

@@ -4,22 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
+    {% block stylesheets %}
+        <link href="{{ asset('css/main.css') }}" type="text/css" rel="stylesheet"/>
+    {% endblock %}
 </head>
 <body>
     <h1>Pokémon Data</h1>
+    <form id="pokemonForm" action="" method="get">
+        <select name="id">
+            <option value="" selected disabled>Choose a Pokémon</option>
+            {% for pokemon in pokemonData %}
+                <option value="{{ pokemon.id }}">{{ pokemon.name|capitalize }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Details</button>
+    </form>
     {% for pokemon in pokemonData %}
-        <div>
-            <h2>Pokémon ID: {{ loop.index }}</h2>
-            <p>Name: {{ pokemon.getName() }}</p>
-            <p>Types:</p>
-            <ul>
-                {% for type in pokemon.getTypes() %}
-                    <li>{{ type }}</li>
-                {% endfor %}
-            </ul>
-            <img src="{{ pokemon.getSprite() }}" alt="Pokemon Sprite">
-            <hr>
-        </div>
+        <a href="">
+            <div class="pokemonDiv {% if pokemon.type %}{{ pokemon.type.0 }}{% endif %}">
+                <h2>Pokedex number: {{ pokemon.id }}</h2>
+                <h2>Name: {{ pokemon.name|capitalize }}</h2>
+                <div>Type:
+                    <ul>
+                        {% for type in pokemon.type %}
+                            <li class="{{ type }}">{{ type|capitalize }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <img src="{{ pokemon.sprite }}" alt="Pokemon Sprite">
+            </div>
+        </a>
     {% endfor %}
 </body>
 </html>
