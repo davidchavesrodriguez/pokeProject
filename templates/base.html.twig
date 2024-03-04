@@ -1,39 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }}</title>
-    {% block stylesheets %}
-        <link href="{{ asset('css/main.css') }}" type="text/css" rel="stylesheet"/>
-    {% endblock %}
-</head>
-<body>
-    <h1>Pokémon Data</h1>
-    <form id="pokemonForm" action="" method="get">
-        <select name="id">
-            <option value="" selected disabled>Choose a Pokémon</option>
-            {% for pokemon in pokemonData %}
-                <option value="{{ pokemon.id }}">{{ pokemon.name|capitalize }}</option>
-            {% endfor %}
-        </select>
-        <button type="submit">Details</button>
-    </form>
-    {% for pokemon in pokemonData %}
-        <a href="">
-            <div class="pokemonDiv {% if pokemon.type %}{{ pokemon.type.0 }}{% endif %}">
-                <h2>Pokedex number: {{ pokemon.id }}</h2>
-                <h2>Name: {{ pokemon.name|capitalize }}</h2>
-                <div>Type:
-                    <ul>
-                        {% for type in pokemon.type %}
-                            <li class="{{ type }}">{{ type|capitalize }}</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-                <img src="{{ pokemon.sprite }}" alt="Pokemon Sprite">
-            </div>
-        </a>
-    {% endfor %}
-</body>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>{{ title }}</title>
+		{% block stylesheets %}
+			<link href="{{ asset('css/main.css') }}" type="text/css" rel="stylesheet"/>
+		{% endblock %}
+	</head>
+	<body>
+		<h1>Pokémon Data</h1>
+
+		<form id="pokemonForm" action="/" method="get">
+			<select name="id" onchange="updateAction(this)">
+				<option selected disabled>Choose a Pokémon</option>
+				{% for pokemon in pokemonData %}
+					<option value="{{ pokemon.id }}">{{ pokemon.name|capitalize }}</option>
+				{% endfor %}
+			</select>
+			<button type="submit">Details</button>
+		</form>
+
+		<script>
+			function updateAction(select) {
+let selectedId = select.value;
+document.getElementById('pokemonForm').action = '/' + selectedId;
+}
+		</script>
+
+
+		<div id="pokemonList">
+			{% for pokemon in pokemonData %}
+				<a href="{{ pokemon.id }}">
+					<div class="pokemonDiv {% if pokemon.type %}{{ pokemon.type.0 }}{% endif %}">
+						<h2>Pokedex number:
+							{{ pokemon.id }}</h2>
+						<h2>Name:
+							{{ pokemon.name|capitalize }}</h2>
+						<div>Type:
+							<ul>
+								{% for type in pokemon.type %}
+									<li class="type {{ type }}">{{ type|capitalize }}</li>
+								{% endfor %}
+							</ul>
+						</div>
+						<img src="{{ pokemon.sprite }}" data-src="{{asset("images/substitute.png")}}" alt="Pokemon Sprite" loading="lazy">
+					</div>
+				</a>
+			{% endfor %}
+		</div>
+
+	</body>
 </html>

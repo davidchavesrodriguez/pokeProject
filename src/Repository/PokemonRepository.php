@@ -21,28 +21,14 @@ class PokemonRepository extends ServiceEntityRepository
         parent::__construct($registry, Pokemon::class);
     }
 
-    //    /**
-    //     * @return Pokemon[] Returns an array of Pokemon objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('p')
-    //            ->andWhere('p.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('p.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?Pokemon
-    //    {
-    //        return $this->createQueryBuilder('p')
-    //            ->andWhere('p.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    /**
+     * Find a Pokemon entity by its id.
+     *
+     * @param int $id The id of the Pokemon entity to find.
+     * @return Pokemon|null The Pokemon entity, or null if not found.
+     */
+    public function findById(int $id): ?Pokemon
+    {
+        return $this->find($id);
+    }
 }

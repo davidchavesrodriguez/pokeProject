@@ -25,7 +25,7 @@ class PokeController extends AbstractController
     {
         // Call the findAll method to retrieve all Pokemon entities
         $allPokemon = $this->pokemonRepository->findAll();
-    
+
         // Return a response object with HTML content
         return $this->render("base.html.twig", [
             "title" => "PokeProject",
@@ -33,9 +33,37 @@ class PokeController extends AbstractController
         ]);
     }
 
+    #[Route("/{id}", name: "showInfo", methods: ["GET"])]
+    public function showInfo(int $id): Response
+    {
+        $pokemon = $this->pokemonRepository->find($id);
+        if (!$pokemon) {
+            throw $this->createNotFoundException('Park not found');
+        }
+$moves = $pokemon->getMoves();
+
+if (count($moves) >= 4) {
+    $randomMoves = array_rand($moves, 4);
+} else {
+    $randomMoves = array_keys($moves);
+}
+$selectedMoves = [];
+foreach ($randomMoves as $index) {
+    $selectedMoves[] = $moves[$index];
+}
+        return $this->render("/showInfo.html.twig", [
+            "title" => $pokemon->getName(),
+            "pokemon" => $pokemon,
+            'selectedMoves' => $selectedMoves,
+
+        ]);
+    }
+
+
     // Creates the whole database if needed
     #[Route("/createDatabase", name: "createDatabase")]
-    public function createDatabase(): Response{
+    public function createDatabase(): Response
+    {
 
         $entityManager = $this->entityManager; // Use the injected entity manager
         $pokemonData = []; // Array para almacenar los datos de los Pokémon
@@ -52,25 +80,25 @@ class PokeController extends AbstractController
                 $typeName[] = $typeData['type']['name']; // Extract the type name from the JSON data
                 $pokemon->setType($typeName);
             }
-            $typeName= null;
+            $typeName = null;
 
             foreach ($data['abilities'] as $abilityData) {
                 $abilityName[] = $abilityData['ability']['name']; // Extract the ability name from the JSON data
                 $pokemon->setAbilities($abilityName);
             }
-            $abilityName= null;
+            $abilityName = null;
 
             foreach ($data['moves'] as $moveData) {
                 $moveName[] = $moveData['move']['name']; // Extract the move name from the JSON data
                 $pokemon->setMoves($moveName);
             }
-            $moveName=null;
+            $moveName = null;
 
             $pokemon->setSprite($data['sprites']['front_default']);
 
             $entityManager->persist($pokemon); // Persist the Pokemon entity
 
-            $pokemonData[] = $pokemon; 
+            $pokemonData[] = $pokemon;
         }
 
         $entityManager->flush(); // Flush changes to the database
