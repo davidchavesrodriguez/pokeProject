@@ -73,9 +73,9 @@ ul {
 
 .showInfoDiv:last-of-type {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   border-radius: 0px 0px 10px 10px;
 }

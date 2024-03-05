@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>{{ title }}</title>
+		<title>{{ title|capitalize }}</title>
 		{% block stylesheets %}
 			<link href="{{ asset('css/main.css') }}" type="text/css" rel="stylesheet"/>
 		{% endblock %}
@@ -12,35 +12,34 @@
 		<div class="mainDiv">
 			<div class="showInfoDiv {% if pokemon.type %}{{ pokemon.type.0 }}{% endif %}">
 				<img src="{{ pokemon.sprite }}" alt="Pokemon Sprite">
-				<h2>Pokedex number:
+				<h2>Pokedex Number:
 					{{ pokemon.id }}</h2>
-				<h2>Name:
+				<h2>Species:
 					{{ pokemon.name|capitalize }}</h2>
-				<div class="showInfoDiv {% if pokemon.type %}{{ pokemon.type.1 }}{% endif %}">
-					<div>Type:
-						<ul>
-							{% for type in pokemon.type %}
-								<li class="type {{ type }}">{{ type|capitalize }}</li>
-							{% endfor %}
-						</ul>
-					</div>
-					<div>Ability:
-						<ul>
-							{% for ability in pokemon.abilities %}
-								<li class="{{ ability }}">{{ ability|capitalize }}</li>
-							{% endfor %}
-						</ul>
-					</div>
-					<div>Posible Moveset:
-						<ul>
-							{% for move in selectedMoves %}
-								<li class="type">{{ move|capitalize }}</li>
-							{% endfor %}
-						</ul>
-					</div>
+			</div>
+			<div class="showInfoDiv {% for type in pokemon.type %}{{ type }} {% endfor %}">
+				<div>Type:
+					<ul>
+						{% for type in pokemon.type %}
+							<li class="type {{ type }}">{{ type|capitalize }}</li>
+						{% endfor %}
+					</ul>
+				</div>
+				<div>Ability:
+					<ul>
+						{% for ability in pokemon.abilities %}
+							<li class="ability">{{ ability|capitalize }}</li>
+						{% endfor %}
+					</ul>
+				</div>
+				<div>Posible Moveset:
+					<ul>
+						{% for move in selectedMoves %}
+							<li class="type">{{ move|capitalize }}</li>
+						{% endfor %}
+					</ul>
 				</div>
 			</div>
 		</div>
-		<a href="/" class="backButton">Back</a>
 	</body>
-</html>
+</html></div><a href="/" class="backButton">Back</a></body></html>

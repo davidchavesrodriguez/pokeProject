@@ -5,7 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Pokemon; // Import the Pokemon entity
+use App\Entity\Pokemon;
 use App\Repository\PokemonRepository;
 use Doctrine\ORM\EntityManagerInterface;
 

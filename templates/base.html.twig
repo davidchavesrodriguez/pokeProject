@@ -33,10 +33,12 @@ document.getElementById('pokemonForm').action = '/' + selectedId;
 			{% for pokemon in pokemonData %}
 				<a href="{{ pokemon.id }}">
 					<div class="pokemonDiv {% if pokemon.type %}{{ pokemon.type.0 }}{% endif %}">
-						<h2>Pokedex number:
-							{{ pokemon.id }}</h2>
-						<h2>Name:
-							{{ pokemon.name|capitalize }}</h2>
+						<h2>
+							{{ pokemon.id }}
+						</h2>
+						<h2>
+							{{ pokemon.name|capitalize }}
+						</h2>
 						<div>Type:
 							<ul>
 								{% for type in pokemon.type %}
