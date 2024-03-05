@@ -1,11 +1,18 @@
 /* GENERAL */
+@import url("https://fonts.cdnfonts.com/css/pokemon-solid");
 @import url("https://fonts.googleapis.com/css2?family=Calistoga&display=swap");
+
 body {
   background-color: #fafad2;
   font-family: "Calistoga", serif;
   font-weight: 400;
   font-style: normal;
 }
+
+h1 {
+  font-family: "Pokemon Solid", sans-serif;
+}
+
 /* Pokemon Cards */
 .pokemonDiv {
   display: flex;
@@ -24,7 +31,6 @@ img {
   border-radius: 50%;
   margin-top: 1%;
   margin-bottom: 1%;
-  aspect-ratio: auto;
 }
 
 a,
@@ -42,55 +48,67 @@ ul {
   border: 3px solid white;
   border-radius: 10px;
   text-align: center;
-  margin-top: 20%;
+  margin: 1rem;
   padding: 0.3em;
 }
 
 /* Show info page */
-.mainDiv{
-    display: flex;
-    flex-direction: column;
+.mainDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+
 .showInfoDiv {
+  width: 75%;
+}
+
+.showInfoDiv:first-of-type {
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
   align-items: center;
-  justify-content: space-between;
-  margin: 0 auto;
+  border-radius: 10px 10px 0px 0px;
+}
 
-  div{
-    width: max-content;
-  }
+.showInfoDiv:last-of-type {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 0px 0px 10px 10px;
+}
 
-  ul {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
-  }
+/* Stat lists */
+.showInfoDiv ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
 
-  .type {
-    width: 100%;
-  }
+.showInfoDiv .type {
+  width: 33%;
 }
 
 /* Pokemon types */
 .grass {
-  background-color: green;
+  background-color: rgb(5, 177, 5);
   color: white;
 }
 
 .fire {
-  background-color: red;
+  background-color: rgb(191, 3, 3);
   color: white;
 }
 
 .water {
-  background-color: blue;
-  color: white;
+  background-color: rgb(38, 190, 255);
+  color: black;
 }
 
 .electric {
-  background-color: yellow;
+  background-color: rgb(255, 234, 0);
   color: black;
 }
 
@@ -110,7 +128,7 @@ ul {
 }
 
 .ground {
-  background-color: brown;
+  background-color: rgb(183, 134, 49);
   color: white;
 }
 
@@ -130,8 +148,8 @@ ul {
 }
 
 .rock {
-  background-color: gray;
-  color: black;
+  background-color: rgb(127, 44, 0);
+  color: white;
 }
 
 .ghost {
@@ -160,6 +178,6 @@ ul {
 }
 
 .normal {
-  background-color: whitesmoke;
+  background-color: rgb(194, 194, 194);
   color: black;
 }
