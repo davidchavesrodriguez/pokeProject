@@ -58,6 +58,7 @@ class PokeController extends AbstractController
             "title" => $pokemon->getName(),
             "pokemon" => $pokemon,
             'selectedMoves' => $selectedMoves,
+            "id" => $id
 
         ]);
     }
@@ -82,9 +83,29 @@ class PokeController extends AbstractController
 
         return $this->render('modify.html.twig', [
             'form' => $form->createView(),
+            "id" => $pokemon->getId()
         ]);
     }
 
+    #[Route("/add", name: "add")]
+    public function add(Request $request, EntityManagerInterface $entityManager)
+    {
+        $pokemon = new Pokemon(); // Create a new Pokemon instance
+    
+        $form = $this->createForm(PokemonType::class, $pokemon); // Bind the Pokemon instance to the form
+        $form->handleRequest($request);
+    
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($pokemon); // Persist the new Pokemon entity
+            $entityManager->flush();
+    
+            return $this->redirectToRoute('mainpage'); // Redirect to the main page or any other route
+        }
+    
+        return $this->render('modify.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }    
 
     // Creates the whole database if needed
     #[Route("/createDatabase", name: "createDatabase")]

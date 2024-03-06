@@ -4,8 +4,7 @@
 {% endblock %}
 {%block content%}
 	<body>
-		<div class="mainDiv">
-		</body>
+		<div class="mainDiv"></body>
 	</body>
 </html>
 <div class="showInfoDiv {% if pokemon.type %}{{ pokemon.type.0 }}{% endif %}">
@@ -37,5 +36,10 @@
 				<li class="type">{{ move|capitalize }}</li>
 			{% endfor %}
 		</ul>
+		<a href="{{ path('modify', {'id': pokemon.id}) }}">
+			<button class="button-48">Modify
+				{{ pokemon.name|capitalize }}</button>
+		</a>
+
 	</div>
 </div></div></body></html></div>{% endblock %}

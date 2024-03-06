@@ -4,19 +4,20 @@
 {% endblock %}
 
 {%block content%}
-	{% block stylesheets %}
-		<link href="{{ asset('build/app.css') }}" type="text/css" rel="stylesheet"/>
-	{% endblock %}
-	<body>
-		<form id="pokemonForm" action="/" method="get">
+	<form id="pokemonForm" action="/" method="get">
+		<div class="semiHeader">
 			<select name="id" onchange="updateAction(this)">
-				<option selected disabled>Choose a Pokémon</option>
+				<option selected disabled>Find a Pokémon</option>
 				{% for pokemon in pokemonData %}
 					<option value="{{ pokemon.id }}">{{ pokemon.name|capitalize }}</option>
 				{% endfor %}
 			</select>
 			<button type="submit">Details</button>
+
 		</form>
+		<a href="{{path("add")}}">
+			<button>Add a pokemon</button>
+		</a>
 
 		<script>
 			function updateAction(select) {
@@ -24,30 +25,28 @@ let selectedId = select.value;
 document.getElementById('pokemonForm').action = '/pokemon/' + selectedId;
 }
 		</script>
+	</div>
 
-
-		<div id="pokemonList">
-			{% for pokemon in pokemonData %}
-				<a href="pokemon/{{ pokemon.id }}">
-					<div class="pokemonDiv {% if pokemon.type %}{{ pokemon.type.0 }}{% endif %}">
-						<h2>
-							{{ pokemon.id }}
-						</h2>
-						<h2>
-							{{ pokemon.name|capitalize }}
-						</h2>
-						<div>Type:
-							<ul>
-								{% for type in pokemon.type %}
-									<li class="type {{ type }}">{{ type|capitalize }}</li>
-								{% endfor %}
-							</ul>
-						</div>
-						<img src="{{ pokemon.sprite }}" data-src="{{asset("images/substitute.png")}}" alt="Pokemon Sprite" loading="lazy">
+	<div id="pokemonList">
+		{% for pokemon in pokemonData %}
+			<a href="pokemon/{{ pokemon.id }}">
+				<div class="pokemonDiv {% if pokemon.type %}{{ pokemon.type.0 }}{% endif %}">
+					<h2>
+						{{ pokemon.id }}
+					</h2>
+					<h2>
+						{{ pokemon.name|capitalize }}
+					</h2>
+					<div>Type:
+						<ul>
+							{% for type in pokemon.type %}
+								<li class="type {{ type }}">{{ type|capitalize }}</li>
+							{% endfor %}
+						</ul>
 					</div>
-				</a>
-			{% endfor %}
-		</div>
-
-	</body>
-</html>{% endblock %}
+					<img src="{{ pokemon.sprite }}" data-src="{{asset("images/substitute.png")}}" alt="Pokemon Sprite" loading="lazy">
+				</div>
+			</a>
+		{% endfor %}
+	</div>
+{% endblock %}

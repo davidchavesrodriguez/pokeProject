@@ -9,6 +9,19 @@ body {
   font-style: normal;
 }
 
+button {
+  background-color: rgb(245, 182, 24);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: rgb(199, 146, 12);
+}
+
 header, footer {
   color: #000000;
   background-color: rgb(245, 182, 24);
@@ -18,6 +31,21 @@ header, footer {
 
 h1 {
   font-family: "Pokemon Solid", sans-serif;
+}
+
+
+#pokemonForm{
+  padding: 1px;
+  margin-bottom: 0px;
+  border: none;
+}
+.semiHeader{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  border: 3px double rgb(245, 182, 24);
+  padding: 1%;
 }
 
 /* Pokemon Cards */
@@ -50,6 +78,10 @@ a:visited {
 
 ul {
   list-style: none;
+}
+
+.pokemonDiv .type{
+  width: 50%;
 }
 
 .type {
@@ -88,6 +120,46 @@ ul {
   align-items: center;
   border-radius: 0px 0px 10px 10px;
 }
+
+/* Modify */
+
+.modifyClass{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+form{
+  border: 3px solid  rgb(245, 182, 24);
+  padding: 5%;
+  margin-bottom: 10%;
+  display: flex;
+  flex-direction: row;
+  gap: 1%;
+}
+
+input, textarea{
+  width: fit-content;
+  height: 100%;
+  border-radius: 10%;
+  box-shadow: 3px 3px 3px;
+}
+
+input:hover, textarea:hover{
+  background-color: lightcyan;
+  width: fit-content;
+  height: 100%;
+  border-radius: 10%;
+  box-shadow: 6px 6px 6px;
+}
+
+form div{
+  margin-bottom: 5%;
+  display: flex;
+  flex-direction: column;
+}
+
 
 /* Stat lists */
 .showInfoDiv ul {
@@ -226,6 +298,10 @@ ul {
   white-space: nowrap;
 }
 
+.button-48 a:hover {
+  color: #000000; 
+}
+
 .button-48:before {
   animation: opacityFallbackOut 0.5s step-end forwards;
   backface-visibility: hidden;
@@ -241,20 +317,28 @@ ul {
     -webkit-clip-path 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
   width: 100%;
   border-radius: 33%;
+  color: #000000;
+
 }
 
 .button-48:hover:before {
   animation: opacityFallbackIn 0s step-start forwards;
   clip-path: polygon(0 0, 101% 0, 101% 101%, 0 101%);
   border-radius: 33%;
+  color: #000000;
+
 }
 
 .button-48:after {
   background-color: #ffffff;
   border-radius: 33%;
+  color: #000000;
+
 }
 
 .button-48 span {
   z-index: 1;
   position: relative;
+  color: #000000;
+
 }

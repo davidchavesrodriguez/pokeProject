@@ -3,16 +3,24 @@
 {% block title %}Modify Pokemon{% endblock %}
 
 {% block content %}
-    <h2>Modify Pokemon</h2>
-    {{ form_start(form) }}
+    <div class="modifyClass">
+        {% if id is defined %}
+        <h2>Modify Pokemon</h2>
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{ id }}.png" alt="">
+        {% else %}
+        <h2>Add Pokemon</h2>
+        <img src="{{ asset('images/substitute.png') }}" alt="Substitute image">
+        {% endif %}
+        {{ form_start(form) }}
 
-    {{ form_row(form.name) }}
-    {{ form_row(form.type) }}
-    {{ form_row(form.abilities) }}
-    {{ form_row(form.moves) }}
-    {{ form_row(form.sprite) }}
+        {{ form_row(form.name) }}
+        {{ form_row(form.type) }}
+        {{ form_row(form.abilities) }}
+        {{ form_row(form.moves) }}
+        {{ form_row(form.sprite) }}
 
-    <button type="submit">Save</button>
+        <button type="button-48">Save</button>
 
-    {{ form_end(form) }}
+        {{ form_end(form) }}
+    </div>
 {% endblock %}
