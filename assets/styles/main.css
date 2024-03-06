@@ -9,6 +9,13 @@ body {
   font-style: normal;
 }
 
+header, footer {
+  color: #000000;
+  background-color: rgb(245, 182, 24);
+  display: flex;
+  justify-content: space-around;
+}
+
 h1 {
   font-family: "Pokemon Solid", sans-serif;
 }
@@ -38,6 +45,7 @@ a:hover,
 a:active,
 a:visited {
   text-decoration: none;
+  color: #000000;
 }
 
 ul {

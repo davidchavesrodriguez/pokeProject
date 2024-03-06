@@ -21,14 +21,14 @@
 		<script>
 			function updateAction(select) {
 let selectedId = select.value;
-document.getElementById('pokemonForm').action = '/' + selectedId;
+document.getElementById('pokemonForm').action = '/pokemon/' + selectedId;
 }
 		</script>
 
 
 		<div id="pokemonList">
 			{% for pokemon in pokemonData %}
-				<a href="{{ pokemon.id }}">
+				<a href="pokemon/{{ pokemon.id }}">
 					<div class="pokemonDiv {% if pokemon.type %}{{ pokemon.type.0 }}{% endif %}">
 						<h2>
 							{{ pokemon.id }}

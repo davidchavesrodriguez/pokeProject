@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Form\PokemonType;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,10 +16,12 @@ class PokeController extends AbstractController
     private $entityManager;
     private $pokemonRepository;
 
-    public function __construct(PokemonRepository $pokemonRepository)
+    public function __construct(EntityManagerInterface $entityManager, PokemonRepository $pokemonRepository)
     {
+        $this->entityManager = $entityManager;
         $this->pokemonRepository = $pokemonRepository;
     }
+
 
     #[Route("/", name: "mainpage")]
     public function getNamesAndSprites()
@@ -32,8 +36,8 @@ class PokeController extends AbstractController
         ]);
     }
 
-    #[Route("/{id}", name: "showInfo", methods: ["GET"])]
-    public function showInfo(int $id): Response
+    #[Route("pokemon/{id}", name: "showInfo", methods: ["GET"])]
+    public function showInfo($id): Response
     {
         $pokemon = $this->pokemonRepository->find($id);
         if (!$pokemon) {
@@ -55,6 +59,29 @@ class PokeController extends AbstractController
             "pokemon" => $pokemon,
             'selectedMoves' => $selectedMoves,
 
+        ]);
+    }
+
+    #[Route("/pokemon/{id}/modify", name: "modify")]
+    public function modify($id, Request $request)
+    {
+        $pokemon = $this->pokemonRepository->find($id); // Using injected repository
+
+        if (!$pokemon) {
+            throw $this->createNotFoundException('Pokemon not found');
+        }
+
+        $form = $this->createForm(PokemonType::class, $pokemon);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->entityManager->flush();
+
+            return $this->redirectToRoute('showInfo', ['id' => $pokemon->getId()]);
+        }
+
+        return $this->render('modify.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 
