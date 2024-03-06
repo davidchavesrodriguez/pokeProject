@@ -14,9 +14,8 @@ class PokeController extends AbstractController
     private $entityManager;
     private $pokemonRepository;
 
-    public function __construct(EntityManagerInterface $entityManager, PokemonRepository $pokemonRepository)
+    public function __construct(PokemonRepository $pokemonRepository)
     {
-        $this->entityManager = $entityManager;
         $this->pokemonRepository = $pokemonRepository;
     }
 
@@ -27,7 +26,7 @@ class PokeController extends AbstractController
         $allPokemon = $this->pokemonRepository->findAll();
 
         // Return a response object with HTML content
-        return $this->render("base.html.twig", [
+        return $this->render("main.html.twig", [
             "title" => "PokeProject",
             "pokemonData" => $allPokemon,
         ]);
@@ -38,19 +37,19 @@ class PokeController extends AbstractController
     {
         $pokemon = $this->pokemonRepository->find($id);
         if (!$pokemon) {
-            throw $this->createNotFoundException('Park not found');
+            throw $this->createNotFoundException('Pokemon not found');
         }
-$moves = $pokemon->getMoves();
+        $moves = $pokemon->getMoves();
 
-if (count($moves) >= 4) {
-    $randomMoves = array_rand($moves, 4);
-} else {
-    $randomMoves = array_keys($moves);
-}
-$selectedMoves = [];
-foreach ($randomMoves as $index) {
-    $selectedMoves[] = $moves[$index];
-}
+        if (count($moves) >= 4) {
+            $randomMoves = array_rand($moves, 4);
+        } else {
+            $randomMoves = array_keys($moves);
+        }
+        $selectedMoves = [];
+        foreach ($randomMoves as $index) {
+            $selectedMoves[] = $moves[$index];
+        }
         return $this->render("/showInfo.html.twig", [
             "title" => $pokemon->getName(),
             "pokemon" => $pokemon,
@@ -103,7 +102,7 @@ foreach ($randomMoves as $index) {
 
         $entityManager->flush(); // Flush changes to the database
 
-        return $this->render("base.html.twig", [
+        return $this->render("main.html.twig", [
             "title" => "PokeProject",
             "pokemonData" => $pokemonData,
         ]);
