@@ -22,7 +22,8 @@ button:hover {
   background-color: rgb(199, 146, 12);
 }
 
-header, footer {
+header,
+footer {
   color: #000000;
   background-color: rgb(245, 182, 24);
   display: flex;
@@ -33,13 +34,12 @@ h1 {
   font-family: "Pokemon Solid", sans-serif;
 }
 
-
-#pokemonForm{
+#pokemonForm {
   padding: 1px;
   margin-bottom: 0px;
   border: none;
 }
-.semiHeader{
+.semiHeader {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -80,7 +80,7 @@ ul {
   list-style: none;
 }
 
-.pokemonDiv .type{
+.pokemonDiv .type {
   width: 50%;
 }
 
@@ -123,15 +123,15 @@ ul {
 
 /* Modify */
 
-.modifyClass{
+.modifyClass {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-form{
-  border: 3px solid  rgb(245, 182, 24);
+form {
+  border: 3px solid rgb(245, 182, 24);
   padding: 5%;
   margin-bottom: 10%;
   display: flex;
@@ -139,14 +139,16 @@ form{
   gap: 1%;
 }
 
-input, textarea{
+input,
+textarea {
   width: fit-content;
   height: 100%;
   border-radius: 10%;
   box-shadow: 3px 3px 3px;
 }
 
-input:hover, textarea:hover{
+input:hover,
+textarea:hover {
   background-color: lightcyan;
   width: fit-content;
   height: 100%;
@@ -154,12 +156,11 @@ input:hover, textarea:hover{
   box-shadow: 6px 6px 6px;
 }
 
-form div{
+form div {
   margin-bottom: 5%;
   display: flex;
   flex-direction: column;
 }
-
 
 /* Stat lists */
 .showInfoDiv ul {
@@ -299,7 +300,7 @@ form div{
 }
 
 .button-48 a:hover {
-  color: #000000; 
+  color: #000000;
 }
 
 .button-48:before {
@@ -318,7 +319,6 @@ form div{
   width: 100%;
   border-radius: 33%;
   color: #000000;
-
 }
 
 .button-48:hover:before {
@@ -326,19 +326,36 @@ form div{
   clip-path: polygon(0 0, 101% 0, 101% 101%, 0 101%);
   border-radius: 33%;
   color: #000000;
-
 }
 
 .button-48:after {
   background-color: #ffffff;
   border-radius: 33%;
   color: #000000;
-
 }
 
 .button-48 span {
   z-index: 1;
   position: relative;
   color: #000000;
+}
 
+.buttonA {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #4caf50; /* Green */
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.buttonA:hover {
+  background-color: #45a049;
+}
+
+.buttonA:active {
+  background-color: #3e8e41;
 }
